@@ -1,96 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="10dp"
     tools:context=".MainPage">
 
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        tools:layout_editor_absoluteX="148dp"
-        tools:layout_editor_absoluteY="422dp" />
-
-    <Button
-        android:id="@+id/button4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        tools:layout_editor_absoluteX="269dp"
-        tools:layout_editor_absoluteY="426dp" />
-
     <EditText
-        android:id="@+id/editText6"
+        android:id="@+id/nextWeekText"
         android:layout_width="106dp"
         android:layout_height="51dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="text"
         android:text="Next week"
         android:textSize="18sp"
         android:typeface="monospace"
-        tools:layout_editor_absoluteX="262dp"
-        tools:layout_editor_absoluteY="371dp" />
+        tools:layout_editor_absoluteX="243dp"
+        tools:layout_editor_absoluteY="243dp" />
 
     <EditText
-        android:id="@+id/editText5"
+        android:id="@+id/threeDaysText"
         android:layout_width="95dp"
         android:layout_height="51dp"
         android:ems="10"
+        android:gravity="center_horizontal"
         android:inputType="textPersonName"
         android:text="3 days"
         android:textSize="18sp"
         android:typeface="monospace"
-        tools:layout_editor_absoluteX="145dp"
-        tools:layout_editor_absoluteY="371dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="246dp" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/Description"
         android:layout_width="381dp"
-        android:layout_height="111dp"
+        android:layout_height="50dp"
         android:ems="10"
-        android:inputType="textMultiLine"
-        android:singleLine="false"
-        android:text="According to current projections, you should buy gas:"
-        android:textSize="24sp"
-        android:typeface="monospace"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="51dp" />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Refresh"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" />
+        android:inputType="none"
+        android:singleLine="true"
+        android:text="According to current projections, you should:"
+        android:textAppearance="@android:style/TextAppearance.Medium"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="61dp" />
 
     <EditText
-        android:id="@+id/editText"
-        android:layout_width="121dp"
+        android:id="@+id/date"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
         android:ems="10"
+        android:gravity="center_horizontal"
         android:inputType="date"
+        android:singleLine="true"
         android:text="04/23/2018"
-        tools:layout_editor_absoluteX="259dp"
-        tools:layout_editor_absoluteY="4dp" />
+        tools:layout_editor_absoluteX="64dp"
+        tools:layout_editor_absoluteY="16dp" />
 
     <EditText
-        android:id="@+id/editText2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/description2"
+        android:layout_width="400"
+        android:layout_height="21dp"
+        android:background="@android:color/transparent"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Gas prices will go:"
+        android:text="Gas prices will most likely go:"
         android:typeface="monospace"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="325dp" />
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="173dp" />
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/tmrText"
         android:layout_width="106dp"
         android:layout_height="51dp"
         android:ems="10"
@@ -98,15 +80,105 @@
         android:text="Tomorrow"
         android:textSize="18sp"
         android:typeface="serif"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="371dp" />
+        tools:layout_editor_absoluteX="10dp"
+        tools:layout_editor_absoluteY="246dp" />
 
-    <Button
-        android:id="@+id/button2"
+    <ImageButton
+        android:id="@+id/refreshIconButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
+        android:contentDescription="refresh prices"
+        app:srcCompat="@android:drawable/ic_menu_rotate"
+        tools:layout_editor_absoluteX="197dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <EditText
+        android:id="@+id/dynamicDescription"
+        android:layout_width="300dp"
+        android:layout_height="43dp"
+        android:ems="10"
+        android:gravity="center_horizontal"
+        android:inputType="text"
+        android:text="buy gas | wait until (tmr/3 days later)"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.19"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="120dp" />
+
+    <EditText
+        android:id="@+id/asOfDateText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="50dp"
+        android:background="@android:color/transparent"
+        android:ems="10"
+        android:inputType="none"
+        android:singleLine="true"
+        android:text="As of"
+        android:textIsSelectable="false"
         tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="422dp" />
+        tools:layout_editor_absoluteY="16dp" />
+
+    <Button
+        android:id="@+id/addEventButton"
+        android:layout_width="270dp"
+        android:layout_height="50dp"
+        android:text="Add reminder to calendar"
+        tools:layout_editor_absoluteX="36dp"
+        tools:layout_editor_absoluteY="350dp" />
+
+    <ImageButton
+        android:id="@+id/threeDaysIcon"
+        android:layout_width="66dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.44"
+        app:srcCompat="@android:drawable/arrow_up_float"
+        tools:layout_editor_absoluteX="145dp" />
+
+    <ImageButton
+        android:id="@+id/nextWeekIcon"
+        android:layout_width="66dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.44"
+        app:srcCompat="@android:drawable/arrow_up_float"
+        tools:layout_editor_absoluteX="266dp" />
+
+    <ImageButton
+        android:id="@+id/tmrIcon"
+        android:layout_width="66dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.44"
+        app:srcCompat="@android:drawable/arrow_up_float"
+        tools:layout_editor_absoluteX="26dp" />
+
+    <CheckBox
+        android:id="@+id/nextWeekCheckBox"
+        android:layout_width="34dp"
+        android:layout_height="35dp"
+        android:scaleX="1"
+        tools:layout_editor_absoluteX="276dp"
+        tools:layout_editor_absoluteY="295dp" />
+
+    <CheckBox
+        android:id="@+id/threeDaysCheckbox"
+        android:layout_width="34dp"
+        android:layout_height="35dp"
+        android:scaleX="1"
+        tools:layout_editor_absoluteX="159dp"
+        tools:layout_editor_absoluteY="297dp" />
+
+    <CheckBox
+        android:id="@+id/tmrCheckbox"
+        android:layout_width="34dp"
+        android:layout_height="35dp"
+        android:scaleX="1"
+        tools:layout_editor_absoluteX="43dp"
+        tools:layout_editor_absoluteY="296dp" />
 
 </android.support.constraint.ConstraintLayout>
