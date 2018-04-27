@@ -61,7 +61,7 @@
 
     <EditText
         android:id="@+id/description2"
-        android:layout_width="400"
+        android:layout_width="400dp"
         android:layout_height="21dp"
         android:background="@android:color/transparent"
         android:ems="10"
