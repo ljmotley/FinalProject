@@ -1,10 +1,11 @@
 package edu.illinois.cs.cs125.finalproject;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -23,6 +24,20 @@ public class MainPage extends AppCompatActivity {
     /** Request queue for our network requests. */
     private static RequestQueue requestQueue;
 
+    /** today's price */
+    private final int todayPrice = 60;
+
+    /** projection for tomorrow */
+    private final int tomorrowProjection = 55;
+
+    /** projection for 3 days */
+    private final int threeDayProjection = 65;
+
+    /** projection for next week */
+    private final int nextWeekProjection = 60;
+
+
+
     /**
      * Run when our activity comes into view.
      *
@@ -39,7 +54,7 @@ public class MainPage extends AppCompatActivity {
         setContentView(R.layout.activity_main_page);
 
         // Attach the handler to our UI button
-        final Button startAPICall = findViewById(R.id.refreshIconButton);
+        final ImageButton startAPICall = findViewById(R.id.refreshIconButton);
         startAPICall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
@@ -47,6 +62,30 @@ public class MainPage extends AppCompatActivity {
                 startAPICall();
             }
         });
+
+        final ImageButton tmrIcon = findViewById(R.id.tmrIcon);
+
+        final ImageButton threeDaysIcon = findViewById(R.id.threeDaysIcon);
+
+        final ImageButton  nextWeekIcon = findViewById(R.id.nextWeekIcon);
+
+        if (tomorrowProjection < todayPrice) {
+            tmrIcon.setBackgroundColor(Color.GREEN);
+        } else {
+            tmrIcon.setBackgroundColor(Color.RED);
+        }
+
+        if (threeDayProjection < todayPrice) {
+            threeDaysIcon.setBackgroundColor(Color.GREEN);
+        } else {
+            threeDaysIcon.setBackgroundColor(Color.RED);
+        }
+
+        if (nextWeekProjection < todayPrice) {
+            nextWeekIcon.setBackgroundColor(Color.GREEN);
+        } else {
+            nextWeekIcon.setBackgroundColor(Color.RED);
+        }
     }
 
     /**
