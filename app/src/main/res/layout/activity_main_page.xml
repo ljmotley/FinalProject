@@ -4,258 +4,127 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
-    tools:context=".MainPage"
     tools:layout_editor_absoluteY="81dp">
 
-    <EditText
-        android:id="@+id/nextWeekText"
+    <TextView
+        android:id="@+id/asOfDateText"
         android:layout_width="0dp"
-        android:layout_height="51dp"
-        android:layout_marginBottom="36dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="49dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Next week"
-        android:textSize="18sp"
-        android:typeface="monospace"
-        app:layout_constraintBottom_toBottomOf="@+id/nextWeekCheckBox"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/threeDaysIcon"
-        app:layout_constraintTop_toTopOf="@+id/nextWeekIcon" />
-
-    <EditText
-        android:id="@+id/threeDaysText"
-        android:layout_width="95dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="124dp"
-        android:layout_marginLeft="124dp"
-        android:layout_marginRight="124dp"
-        android:layout_marginStart="124dp"
-        android:layout_marginTop="2dp"
-        android:ems="10"
-        android:gravity="center_horizontal"
-        android:inputType="textPersonName"
-        android:text="3 days"
-        android:textSize="18sp"
-        android:typeface="monospace"
-        app:layout_constraintBottom_toTopOf="@+id/threeDaysCheckbox"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/dynamicDescription"
-        app:layout_constraintTop_toBottomOf="@+id/threeDaysIcon" />
-
-    <EditText
-        android:id="@+id/Description"
-        android:layout_width="381dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="82dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="82dp"
-        android:ems="10"
-        android:inputType="none"
-        android:singleLine="true"
-        android:text="According to current projections, you should:"
-        android:textAppearance="@android:style/TextAppearance.Medium"
-        app:layout_constraintBottom_toBottomOf="@+id/description2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline" />
+        android:layout_height="29dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginStart="25dp"
+        android:text="As of"
+        android:textSize="20sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/date"
+        app:layout_constraintEnd_toStartOf="@+id/date"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/date"
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="69dp"
-        android:layout_marginLeft="64dp"
-        android:layout_marginRight="69dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="16dp"
-        android:background="@android:color/transparent"
-        android:ems="10"
-        android:gravity="center_horizontal"
-        android:inputType="date"
-        android:singleLine="true"
-        android:text="04/23/2018"
-        app:layout_constraintEnd_toEndOf="@+id/refreshIconButton"
-        app:layout_constraintStart_toStartOf="@+id/Description"
-        app:layout_constraintTop_toTopOf="@+id/asOfDateText" />
-
-    <EditText
-        android:id="@+id/description2"
-        android:layout_width="400dp"
-        android:layout_height="21dp"
-        android:layout_marginBottom="52dp"
-        android:layout_marginLeft="31dp"
-        android:layout_marginStart="31dp"
-        android:layout_marginTop="53dp"
-        android:background="@android:color/transparent"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Gas prices will most likely go:"
-        android:typeface="monospace"
-        app:layout_constraintBottom_toTopOf="@+id/tmrText"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/dynamicDescription" />
-
-    <EditText
-        android:id="@+id/tmrText"
-        android:layout_width="106dp"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginEnd="43dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="43dp"
-        android:layout_marginStart="40dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginEnd="11dp"
+        android:layout_marginRight="11dp"
+        android:layout_marginTop="4dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Tomorrow"
-        android:textSize="18sp"
-        android:typeface="serif"
-        app:layout_constraintBottom_toBottomOf="@+id/threeDaysText"
-        app:layout_constraintEnd_toStartOf="@+id/threeDaysCheckbox"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/threeDaysText" />
+        android:inputType="date"
+        app:layout_constraintBottom_toBottomOf="@+id/refreshIconButton2"
+        app:layout_constraintEnd_toStartOf="@+id/refreshIconButton2"
+        app:layout_constraintStart_toEndOf="@+id/asOfDateText"
+        app:layout_constraintTop_toTopOf="@+id/refreshIconButton2" />
 
     <ImageButton
-        android:id="@+id/refreshIconButton"
+        android:id="@+id/refreshIconButton2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:layout_marginEnd="101dp"
-        android:layout_marginRight="101dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="6dp"
         android:contentDescription="refresh prices"
-        app:layout_constraintBottom_toTopOf="@+id/Description"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/date"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/ic_menu_rotate" />
 
-    <EditText
-        android:id="@+id/dynamicDescription"
-        android:layout_width="0dp"
-        android:layout_height="43dp"
-        android:layout_marginBottom="80dp"
-        android:layout_marginEnd="41dp"
-        android:layout_marginLeft="41dp"
-        android:layout_marginRight="41dp"
-        android:layout_marginStart="41dp"
-        android:layout_marginTop="79dp"
-        android:ems="10"
-        android:gravity="center_horizontal"
-        android:inputType="text"
-        android:text="buy gas | wait until (tmr/3 days later)"
-        app:layout_constraintBottom_toTopOf="@+id/nextWeekText"
-        app:layout_constraintEnd_toEndOf="parent"
+    <Button
+        android:id="@+id/tmrIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="172dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/date" />
 
-    <EditText
-        android:id="@+id/asOfDateText"
+    <Button
+        android:id="@+id/threeDaysIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="46dp"
-        android:layout_marginStart="46dp"
-        android:layout_marginTop="30dp"
-        android:width="50dp"
-        android:background="@android:color/transparent"
-        android:ems="10"
-        android:inputType="none"
-        android:singleLine="true"
-        android:text="As of"
-        android:textIsSelectable="false"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginLeft="44dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="165dp"
+        app:layout_constraintStart_toEndOf="@+id/nextWeekIcon"
+        app:layout_constraintTop_toBottomOf="@+id/refreshIconButton2" />
 
     <Button
-        android:id="@+id/addEventButton"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="26dp"
-        android:layout_marginLeft="26dp"
-        android:layout_marginRight="26dp"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="20dp"
-        android:text="Add reminder to calendar"
-        app:layout_constraintEnd_toEndOf="@+id/nextWeekIcon"
-        app:layout_constraintStart_toStartOf="@+id/tmrText"
-        app:layout_constraintTop_toBottomOf="@+id/nextWeekCheckBox" />
-
-    <ImageButton
-        android:id="@+id/threeDaysIcon"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        app:layout_constraintBottom_toBottomOf="@+id/nextWeekIcon"
-        app:layout_constraintEnd_toStartOf="@+id/nextWeekText"
-        app:layout_constraintStart_toEndOf="@+id/tmrIcon"
-        app:layout_constraintTop_toTopOf="@+id/nextWeekIcon"
-        app:srcCompat="@android:drawable/arrow_up_float" />
-
-    <ImageButton
         android:id="@+id/nextWeekIcon"
-        android:layout_width="66dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="69dp"
-        android:layout_marginLeft="69dp"
-        android:layout_marginRight="69dp"
-        android:layout_marginStart="69dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/description2"
-        app:layout_constraintStart_toStartOf="@+id/refreshIconButton"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/arrow_up_float" />
-
-    <ImageButton
-        android:id="@+id/tmrIcon"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="53dp"
-        android:layout_marginLeft="56dp"
-        android:layout_marginRight="53dp"
-        android:layout_marginStart="56dp"
-        app:layout_constraintBottom_toBottomOf="@+id/threeDaysIcon"
-        app:layout_constraintEnd_toStartOf="@+id/threeDaysIcon"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/description2"
-        app:srcCompat="@android:drawable/arrow_up_float" />
-
-    <CheckBox
-        android:id="@+id/nextWeekCheckBox"
-        android:layout_width="34dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="51dp"
-        android:scaleX="1"
-        app:layout_constraintEnd_toEndOf="@+id/nextWeekText"
-        app:layout_constraintStart_toStartOf="@+id/nextWeekText"
-        app:layout_constraintTop_toBottomOf="@+id/nextWeekIcon" />
-
-    <CheckBox
-        android:id="@+id/threeDaysCheckbox"
-        android:layout_width="34dp"
-        android:layout_height="35dp"
-        android:layout_marginBottom="18dp"
-        android:scaleX="1"
-        app:layout_constraintBottom_toTopOf="@+id/addEventButton"
-        app:layout_constraintEnd_toEndOf="@+id/threeDaysText"
-        app:layout_constraintStart_toStartOf="@+id/threeDaysText" />
-
-    <CheckBox
-        android:id="@+id/tmrCheckbox"
-        android:layout_width="34dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="1dp"
-        android:layout_marginTop="1dp"
-        android:scaleX="1"
-        app:layout_constraintBottom_toBottomOf="@+id/threeDaysCheckbox"
-        app:layout_constraintEnd_toEndOf="@+id/tmrText"
-        app:layout_constraintStart_toStartOf="@+id/tmrText"
-        app:layout_constraintTop_toTopOf="@+id/nextWeekCheckBox" />
-
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="-62dp" />
+        android:layout_marginLeft="44dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="172dp"
+        app:layout_constraintStart_toEndOf="@+id/tmrIcon"
+        app:layout_constraintTop_toBottomOf="@+id/date" />
+
+    <TextView
+        android:id="@+id/nextWeekButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="7dp"
+        android:text="Next Week"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/threeDaysIcon" />
+
+    <TextView
+        android:id="@+id/threeDaysButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="14dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="7dp"
+        android:text="3 Days"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/nextWeekIcon"
+        app:layout_constraintTop_toBottomOf="@+id/nextWeekIcon" />
+
+    <TextView
+        android:id="@+id/tmrText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="22dp"
+        android:layout_marginRight="22dp"
+        android:layout_marginTop="7dp"
+        android:text="TMR"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/tmrIcon"
+        app:layout_constraintTop_toBottomOf="@+id/tmrIcon" />
+
+    <EditText
+        android:id="@+id/description2"
+        android:layout_width="329dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="60dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Gas prices will most likely go:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/refreshIconButton2" />
 
 </android.support.constraint.ConstraintLayout>
