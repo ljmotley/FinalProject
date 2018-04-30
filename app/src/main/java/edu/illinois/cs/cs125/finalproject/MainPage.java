@@ -31,16 +31,16 @@ public class MainPage extends AppCompatActivity {
     private static RequestQueue requestQueue;
 
     /** today's price */
-    private final int todayPrice = 60;
+    private double todayPrice = 0;
 
     /** projection for tomorrow */
-    private final int tomorrowProjection = 55;
+    private double tomorrowProjection = 0;
 
     /** projection for 3 days */
-    private final int threeDayProjection = 65;
+    private double threeDayProjection = 0;
 
     /** projection for next week */
-    private final int nextWeekProjection = 60;
+    private double nextWeekProjection = 0;
 
 
 
@@ -65,7 +65,10 @@ public class MainPage extends AppCompatActivity {
             @Override
             public void onClick(final View v) {
                 Log.d(TAG, "Start API button clicked");
-                startAPICall(5);
+                nextWeekProjection = startAPICall(5);
+                threeDayProjection = startAPICall(3);
+                tomorrowProjection = startAPICall(1);
+                todayPrice = startAPICall(2);
             }
         });
 
@@ -73,7 +76,7 @@ public class MainPage extends AppCompatActivity {
 
         final ImageButton threeDaysIcon = findViewById(R.id.threeDaysIcon);
 
-        final ImageButton  nextWeekIcon = findViewById(R.id.nextWeekIcon);
+        final ImageButton nextWeekIcon = findViewById(R.id.nextWeekIcon);
 
         if (tomorrowProjection < todayPrice) {
             tmrIcon.setBackgroundColor(Color.GREEN);
@@ -92,11 +95,14 @@ public class MainPage extends AppCompatActivity {
         } else {
             nextWeekIcon.setBackgroundColor(Color.RED);
         }
+    }
+
+    private double result = 0.0;
 
     /**
      * Make an API call.
      */
-    void startAPICall(final int day) {
+    Double startAPICall(final int day) {
         try {
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                     Request.Method.GET,
@@ -107,8 +113,8 @@ public class MainPage extends AppCompatActivity {
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(final JSONObject response) {
+                            result = parseData(response);
                             // Log.d(TAG, response.toString());
-                            parseData(response);
                         }
                     }, new Response.ErrorListener() {
                 @Override
@@ -120,6 +126,7 @@ public class MainPage extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return result;
     }
 
     Double parseData(final JSONObject response) {
