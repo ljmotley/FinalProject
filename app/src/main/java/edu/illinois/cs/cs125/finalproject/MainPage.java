@@ -16,10 +16,16 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONObject;
 
+import static java.lang.Double.parseDouble;
+
 
 public class MainPage extends AppCompatActivity {
     /** Default logging tag for messages from the main activity. */
     private static final String TAG = "Lab11:Main";
+
+    private static final int[] lastPrice = {40,45};
+
+    private static final int[] openPrice = {22,27};
 
     /** Request queue for our network requests. */
     private static RequestQueue requestQueue;
@@ -59,7 +65,7 @@ public class MainPage extends AppCompatActivity {
             @Override
             public void onClick(final View v) {
                 Log.d(TAG, "Start API button clicked");
-                startAPICall();
+                startAPICall(5);
             }
         });
 
@@ -86,21 +92,23 @@ public class MainPage extends AppCompatActivity {
         } else {
             nextWeekIcon.setBackgroundColor(Color.RED);
         }
-    }
 
     /**
      * Make an API call.
      */
-    void startAPICall() {
+    void startAPICall(final int day) {
         try {
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                     Request.Method.GET,
-                    "https://www.quandl.com/api/v3/datasets/CHRIS/CME_CL5.json?api_key=K6H-k-nqK72xdr8ZgXwS",
+                    "https://www.quandl.com/api/v3/datasets/CHRIS/CME_CL"+day+".json?" +
+                            "api_key=K6H-k-nqK72xdr8ZgXwS" +
+                            "",
                     null,
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(final JSONObject response) {
-                            Log.d(TAG, response.toString());
+                            // Log.d(TAG, response.toString());
+                            parseData(response);
                         }
                     }, new Response.ErrorListener() {
                 @Override
@@ -113,4 +121,13 @@ public class MainPage extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
+    Double parseData(final JSONObject response) {
+        String fullData = response.toString();
+        //System.out.println(fullData);
+        int locationOfData = fullData.indexOf("\"data\":[[");
+        //System.out.println(fullData.substring(locationOfData+lastPrice[0],locationOfData+lastPrice[1]));
+        return parseDouble(fullData.substring(locationOfData+lastPrice[0],locationOfData+lastPrice[1]));
+    }
+
 }
