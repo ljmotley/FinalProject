@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -38,20 +39,21 @@ public class MainPage extends AppCompatActivity {
     private static RequestQueue requestQueue;
 
     /** today's price */
-    private double todayPrice = 50;
+    private double todayPrice = 50.0;
 
     /** projection for tomorrow */
-    private double tomorrowProjection = 50;
+    private double tomorrowProjection = 60.0;
 
     /** projection for 3 days */
-    private double threeDayProjection = 40;
+    private double threeDayProjection = 40.0;
 
     /** projection for next week */
-    private double nextWeekProjection = 40;
+    private double nextWeekProjection = 30.0;
 
     private String startDate = "";
 
     private String endDate = "";
+
 
 
     /**
@@ -75,6 +77,13 @@ public class MainPage extends AppCompatActivity {
 
         final Button nextWeekIcon = findViewById(R.id.nextWeekIcon);
 
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+        String currentDateAndTime = sdf.format(new Date());
+
+        final TextView refreshedDate = findViewById((R.id.date));
+
+        refreshedDate.setText(currentDateAndTime);
+
         // Attach the handler to our UI button
         final ImageButton startAPICall = findViewById(R.id.refreshIconButton2);
         startAPICall.setOnClickListener(new View.OnClickListener() {
@@ -85,25 +94,25 @@ public class MainPage extends AppCompatActivity {
                 endDate = getDateString(1);
                 System.out.println(startDate + "    " + endDate);
                 Log.d("Time Start", "start of fetching data");
-                nextWeekProjection = startAPICall(5);
                 try{
                     Thread.sleep(100);
+                    nextWeekProjection = startAPICall(5);
                 }
                 catch(InterruptedException ex)
                 {
                     Thread.currentThread().interrupt();
                 }
-                threeDayProjection = startAPICall(3);
                 try{
                     Thread.sleep(100);
+                    threeDayProjection = startAPICall(3);
                 }
                 catch(InterruptedException ex)
                 {
                     Thread.currentThread().interrupt();
                 }
-                tomorrowProjection = startAPICall(1);
                 try{
                     Thread.sleep(100);
+                    tomorrowProjection = startAPICall(1);
                 }
                 catch(InterruptedException ex)
                 {
@@ -115,19 +124,25 @@ public class MainPage extends AppCompatActivity {
         });
         System.out.println(tomorrowProjection);
         System.out.println(todayPrice);
-        if (tomorrowProjection < todayPrice) {
+        if (tomorrowProjection == 0) {
+            tmrIcon.setBackgroundColor(Color.TRANSPARENT);
+        } else if (tomorrowProjection < todayPrice) {
             tmrIcon.setBackgroundColor(Color.GREEN);
         } else {
             tmrIcon.setBackgroundColor(Color.RED);
         }
 
-        if (threeDayProjection > todayPrice) {
+        if (threeDayProjection == 0) {
+            threeDaysIcon.setBackgroundColor(Color.TRANSPARENT);
+        } else if (threeDayProjection < todayPrice) {
             threeDaysIcon.setBackgroundColor(Color.GREEN);
         } else {
             threeDaysIcon.setBackgroundColor(Color.RED);
         }
 
-        if (nextWeekProjection > todayPrice) {
+        if (nextWeekProjection == 0) {
+            nextWeekIcon.setBackgroundColor(Color.TRANSPARENT);
+        } else if (nextWeekProjection < todayPrice) {
             nextWeekIcon.setBackgroundColor(Color.GREEN);
         } else {
             nextWeekIcon.setBackgroundColor(Color.RED);
@@ -170,7 +185,7 @@ public class MainPage extends AppCompatActivity {
         String fullData = response.toString();
         //System.out.println(fullData);
         int locationOfData = fullData.indexOf("\"data\":[[");
-        // System.out.println(fullData.substring(locationOfData+lastPrice[0],locationOfData+lastPrice[1]));
+        System.out.println(fullData.substring(locationOfData+lastPrice[0],locationOfData+lastPrice[1]));
         return parseDouble(fullData.substring(locationOfData+lastPrice[0],locationOfData+lastPrice[1]));
     }
 

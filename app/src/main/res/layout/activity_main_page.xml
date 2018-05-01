@@ -118,12 +118,12 @@
         android:id="@+id/description2"
         android:layout_width="329dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="56dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Gas prices will most likely go:"
+        android:inputType="textMultiLine"
+        android:text="Gas prices will most likely go: (Green is cheaper)"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/refreshIconButton2" />
 
