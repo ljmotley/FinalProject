@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Button;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -16,12 +17,18 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONObject;
 
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Calendar;
+
 import static java.lang.Double.parseDouble;
 
 
 public class MainPage extends AppCompatActivity {
     /** Default logging tag for messages from the main activity. */
-    private static final String TAG = "Lab11:Main";
+    private static final String TAG = "ljm2wsheung2_FinalProject";
 
     private static final int[] lastPrice = {40,45};
 
@@ -31,17 +38,20 @@ public class MainPage extends AppCompatActivity {
     private static RequestQueue requestQueue;
 
     /** today's price */
-    private final int todayPrice = 60;
+    private double todayPrice = 50;
 
     /** projection for tomorrow */
-    private final int tomorrowProjection = 55;
+    private double tomorrowProjection = 50;
 
     /** projection for 3 days */
-    private final int threeDayProjection = 65;
+    private double threeDayProjection = 40;
 
     /** projection for next week */
-    private final int nextWeekProjection = 60;
+    private double nextWeekProjection = 40;
 
+    private String startDate = "";
+
+    private String endDate = "";
 
 
     /**
@@ -59,56 +69,89 @@ public class MainPage extends AppCompatActivity {
         // Load the main layout for our activity
         setContentView(R.layout.activity_main_page);
 
+        final Button tmrIcon = findViewById(R.id.tmrIcon);
+
+        final Button threeDaysIcon = findViewById(R.id.threeDaysIcon);
+
+        final Button nextWeekIcon = findViewById(R.id.nextWeekIcon);
+
         // Attach the handler to our UI button
-        final ImageButton startAPICall = findViewById(R.id.refreshIconButton);
+        final ImageButton startAPICall = findViewById(R.id.refreshIconButton2);
         startAPICall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
                 Log.d(TAG, "Start API button clicked");
-                startAPICall(5);
+                startDate = getDateString(14);
+                endDate = getDateString(1);
+                System.out.println(startDate + "    " + endDate);
+                Log.d("Time Start", "start of fetching data");
+                nextWeekProjection = startAPICall(5);
+                try{
+                    Thread.sleep(100);
+                }
+                catch(InterruptedException ex)
+                {
+                    Thread.currentThread().interrupt();
+                }
+                threeDayProjection = startAPICall(3);
+                try{
+                    Thread.sleep(100);
+                }
+                catch(InterruptedException ex)
+                {
+                    Thread.currentThread().interrupt();
+                }
+                tomorrowProjection = startAPICall(1);
+                try{
+                    Thread.sleep(100);
+                }
+                catch(InterruptedException ex)
+                {
+                    Thread.currentThread().interrupt();
+                }
+                todayPrice = startAPICall(2);
+                Log.d("Time End", "ALL DATA FETCHED");
             }
         });
-
-        final ImageButton tmrIcon = findViewById(R.id.tmrIcon);
-
-        final ImageButton threeDaysIcon = findViewById(R.id.threeDaysIcon);
-
-        final ImageButton  nextWeekIcon = findViewById(R.id.nextWeekIcon);
-
+        System.out.println(tomorrowProjection);
+        System.out.println(todayPrice);
         if (tomorrowProjection < todayPrice) {
             tmrIcon.setBackgroundColor(Color.GREEN);
         } else {
             tmrIcon.setBackgroundColor(Color.RED);
         }
 
-        if (threeDayProjection < todayPrice) {
+        if (threeDayProjection > todayPrice) {
             threeDaysIcon.setBackgroundColor(Color.GREEN);
         } else {
             threeDaysIcon.setBackgroundColor(Color.RED);
         }
 
-        if (nextWeekProjection < todayPrice) {
+        if (nextWeekProjection > todayPrice) {
             nextWeekIcon.setBackgroundColor(Color.GREEN);
         } else {
             nextWeekIcon.setBackgroundColor(Color.RED);
         }
+    }
+
+    private double result = 0.0;
 
     /**
      * Make an API call.
      */
-    void startAPICall(final int day) {
+    Double startAPICall(final int day) {
         try {
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                     Request.Method.GET,
                     "https://www.quandl.com/api/v3/datasets/CHRIS/CME_CL"+day+".json?" +
-                            "api_key=K6H-k-nqK72xdr8ZgXwS" +
-                            "",
+                            "start_date="+startDate+"&"+"end_date="+endDate+"&"+
+                            "api_key=K6H-k-nqK72xdr8ZgXwS",
                     null,
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(final JSONObject response) {
-                            // Log.d(TAG, response.toString());
-                            parseData(response);
+                            result = parseData(response);
+                            Log.d(TAG, response.toString());
                         }
                     }, new Response.ErrorListener() {
                 @Override
@@ -120,14 +163,26 @@ public class MainPage extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return result;
     }
 
     Double parseData(final JSONObject response) {
         String fullData = response.toString();
         //System.out.println(fullData);
         int locationOfData = fullData.indexOf("\"data\":[[");
-        //System.out.println(fullData.substring(locationOfData+lastPrice[0],locationOfData+lastPrice[1]));
+        // System.out.println(fullData.substring(locationOfData+lastPrice[0],locationOfData+lastPrice[1]));
         return parseDouble(fullData.substring(locationOfData+lastPrice[0],locationOfData+lastPrice[1]));
     }
 
+
+    private Date getXDayPrior(final int daysPrior) {
+        final Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, -daysPrior);
+        return cal.getTime();
+    }
+
+    private String getDateString(final int daysPrior) {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        return dateFormat.format(getXDayPrior(daysPrior));
+    }
 }
